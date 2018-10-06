@@ -11,7 +11,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
-
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.Node.*;
+import javafx.scene.layout.BorderPane;
 import java.util.Scanner;
 
 public class Board extends Application
@@ -36,9 +41,28 @@ public class Board extends Application
     imageView1.setPreserveRatio(true);
     imageView1.setSmooth(true);
     imageView1.setCache(true);
+	
+	Image x = new Image("X.png");
+	
+	Button button1 = new Button("click");//create buttons for clicking
+	button1.setTranslateX(-450);//location of button
+	button1.setTranslateY(40);
+	button1.setPrefWidth(100);
+	button1.setPrefHeight(70);
+	//button1.setStyle()
+	button1.setOnAction(new EventHandler<ActionEvent>(){ //when button is clicked, set the graphic of the button and disables the button (wip)
+	@Override public void handle(ActionEvent e) {
+	button1.setGraphic(new ImageView(x));
+    //button1.setDisable(false);
+    }
+	});
 
+	BorderPane root1 = new BorderPane();
+	BorderPane topLeft = new BorderPane();
+	root1.setBottom(button1);
+	
     HBox box = new HBox(); //helps manage sizing image
-    box.getChildren().add(imageView1);
+    box.getChildren().addAll(imageView1, button1);
 
     Group root = new Group(); //holds observable children (what can be in a group)
     root.getChildren().add(box);
@@ -53,6 +77,7 @@ public class Board extends Application
     stage.setScene(scene);
     stage.sizeToScene();
     stage.show();
+	
 
   }
 
